@@ -248,7 +248,7 @@ ContactPhoto.cropAndGetPathToMediaInternal = function (fromPath, cropInfo, type,
 			cropH: cropHeight
 		};
 
-		return PalmCall.call("palm://com.palm.image", "convert", imageConvertParams);
+		return PalmCall.call("palm://com.webos.service.image", "convert", imageConvertParams);
 	});
 
 	future.then(function () {
@@ -333,7 +333,7 @@ ContactPhoto.cropAndGetPath = function (fromPath, cropInfo, type, timingRecorder
 		{
 			imageConvertParams.destSizeW = cropWidth;
 			imageConvertParams.destSizeH = cropHeight;
-			return PalmCall.call("palm://com.palm.image", "ezResize", imageConvertParams);
+			return PalmCall.call("palm://com.webos.service.image", "ezResize", imageConvertParams);
 		}
 
 		imageConvertParams.focusX = cropInfo.focusX;
@@ -342,7 +342,7 @@ ContactPhoto.cropAndGetPath = function (fromPath, cropInfo, type, timingRecorder
 		imageConvertParams.cropW = cropWidth;
 		imageConvertParams.cropH = cropHeight;
 
-		return PalmCall.call("palm://com.palm.image", "convert", imageConvertParams);
+		return PalmCall.call("palm://com.webos.service.image", "convert", imageConvertParams);
 	});
 
 	future.then(function () {
