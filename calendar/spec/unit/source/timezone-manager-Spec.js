@@ -454,6 +454,23 @@ describe("TimezoneManager tests", function () {
 
 	//----------------------------------------------------------------------------------
 
+	it("should test getOffset south of the equator", function(){
+		mgr.timezones = {2026: {"Australia/Sydney": {
+			tz: "Australia/Sydney", year: 2026, hasDstChange: true, utcOffset: 36000, dstOffset: 39600,
+			dstStart: 1791043200, dstEnd: 1775318400
+		}}};
+
+		var january = Date.UTC(2026, 0, 15) / 1000;
+		var july = Date.UTC(2026, 6, 15) / 1000;
+		var december = Date.UTC(2026, 11, 15) / 1000;
+
+		expect(mgr.getOffset(2026, "Australia/Sydney", january)).toEqual(39600);
+		expect(mgr.getOffset(2026, "Australia/Sydney", july)).toEqual(36000);
+		expect(mgr.getOffset(2026, "Australia/Sydney", december)).toEqual(39600);
+	});
+
+	//-------------------------------------------------------------------
+
 	it("should test convertTime ", function(){
 		mgr.timezones = {};
 		mgr.gotLocalTz = false;

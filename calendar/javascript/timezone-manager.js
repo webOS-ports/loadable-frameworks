@@ -325,7 +325,10 @@ var TimezoneManager = Class.create ({
 		if(!tzInfo.hasDstChange){
 			return tzInfo.utcOffset;
 		}
-		else if(timestampNoMillis >= tzInfo.dstStart && timestampNoMillis < tzInfo.dstEnd){
+		// South of the equator daylight time starts late in the year and runs into the next.
+		else if(tzInfo.dstStart <= tzInfo.dstEnd
+			? (timestampNoMillis >= tzInfo.dstStart && timestampNoMillis < tzInfo.dstEnd)
+			: (timestampNoMillis >= tzInfo.dstStart || timestampNoMillis < tzInfo.dstEnd)){
 			return tzInfo.dstOffset;
 		}
 
